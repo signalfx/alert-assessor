@@ -12,7 +12,7 @@ SFX_AUTH_KEY=<AUTH_KEY> python alert-assessor.py <ALERTID>
 
 # Output
 
-The output contains per-rule and whole-detector feedback. The findings are emitted as string "names" that can be mapped to feedback i18n style.
+The output contains per-rule and whole-detector checks. The findings are emitted as string "names" that can be mapped to feedback i18n style.
 
 ```
 {
@@ -21,7 +21,8 @@ The output contains per-rule and whole-detector feedback. The findings are emitt
       [
         'E_RULE_MISSING_RUNBOOK_URL',
         'E_RULE_MISSING_TIP',
-        'E_RULE_MISSING_PARAMETERIZED_SUBJECT', 'E_RULE_MISSING_PARAMETERIZED_BODY'
+        'E_RULE_MISSING_PARAMETERIZED_SUBJECT',
+        'E_RULE_MISSING_PARAMETERIZED_BODY'
       ]
     ],
     'problems': [
