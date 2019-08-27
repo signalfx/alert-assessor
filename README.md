@@ -26,20 +26,21 @@ SFX_AUTH_KEY=<AUTH_KEY> ./alert-assessor.py DETECTOR_ID
 
 The output contains per-rule and whole-detector checks. The findings are emitted as string "names" that can be mapped to feedback i18n style.
 
+Example of `json` output formatted output:
 ```
 {
-  'rule_problems':
-    [
-      [
-        'E_RULE_MISSING_RUNBOOK_URL',
-        'E_RULE_MISSING_TIP',
-        'E_RULE_MISSING_PARAMETERIZED_SUBJECT',
-        'E_RULE_MISSING_PARAMETERIZED_BODY'
-      ]
-    ],
-    'problems': [
-      'E_MISSING_TIMESERIES',
-      'E_TOO_IMMATURE'
-    ]
+    "warnings": {
+        "Dw6JDETE2K1AAACTORJs": [
+            "E_TOO_IMMATURE",
+            "E_OLD_BUT_NO_EVENTS"
+        ]
+    },
+    "rule_warnings": {
+        "Dw6JDETE2K1AAACTORJs": {
+            "0": [
+                "E_RULE_MISSING_RUNBOOK_URL"
+            ]
+        }
+    }
 }
 ```
