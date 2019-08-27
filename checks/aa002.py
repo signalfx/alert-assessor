@@ -19,4 +19,4 @@ class AA002(Check):
         ):
             return True
 
-        return True
+        return False
