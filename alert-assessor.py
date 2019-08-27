@@ -46,16 +46,11 @@ result = {
 def assess_program(program_text):
     received = 0
     with signalfx.SignalFx().signalflow(os.environ['SFX_AUTH_KEY']) as flow:
-        logging.info("Executing SignalFlow for diagnosis (may take a few seconds)")
-        computation = flow.execute(program_text)
+        logging.info("Preflighting SignalFlow for diagnosis (may take a few seconds)")
+        logging.info(program_text)
+        computation = flow.preflight(program_text, now_ms - (3600 * 1000), now_ms)
         for msg in computation.stream():
-            if isinstance(msg, signalfx.signalflow.messages.DataMessage):
-                # We want to get a few ticks of data to ensure the job
-                # has started. So we'll count and break after a few ticks
-                # of data.
-                received += 1
-                if received > 5:
-                    break
+            pass
 
         if computation.find_matched_no_timeseries:
             result['problems'].append(E_MISSING_TIMESERIES)
@@ -65,7 +60,7 @@ def assess_program(program_text):
             result['problems'].append(E_MISSING_AGGREGATION)
 
         computation.close()
-        logging.info("Finished execution after 5 data ticks")
+        logging.info("Finished execution")
 
 def assess_detector(detector):
     assess_program(detector['programText'])
