@@ -3,6 +3,7 @@ import logging
 import os
 import click
 import sys
+import json
 import time
 import requests
 import signalfx
@@ -13,7 +14,6 @@ from checks.check import Check, RuleCheck
 from checks import *
 
 format = "%(asctime)s: %(message)s"
-logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
 
 class Payload:
@@ -29,15 +29,39 @@ class Payload:
     help="SFX token (or SFX_AUTH_KEY env variable)",
 )
 @click.option(
-    "--api_endpoint", default="https://api.signalfx.com", help="API endpoint"
+    "--api_endpoint",
+    default="https://api.signalfx.com",
+    help="API endpoint",
+    show_default=True,
 )
 @click.option(
     "--stream_endpoint",
     default="https://stream.signalfx.com",
     help="Stream endpoint",
+    show_default=True,
 )
+@click.option(
+    "--format",
+    default="human",
+    type=click.Choice(["human", "json"]),
+    help="Output format ('json' disables verbose output)",
+    show_default=True,
+)
+@click.option("--verbose", is_flag=True, default=False)
 @click.argument("detector_id")
-def main(sfx_auth_key, api_endpoint, stream_endpoint, detector_id):
+def main(
+    sfx_auth_key, api_endpoint, stream_endpoint, format, verbose, detector_id
+):
+
+    if verbose:
+        lvl = logging.DEBUG
+    else:
+        lvl = logging.INFO
+
+    if format == "json":
+        lvl = logging.CRITICAL
+
+    logging.basicConfig(format=format, level=lvl, datefmt="%H:%M:%S")
 
     with signalfx.SignalFx(
         api_endpoint=api_endpoint, stream_endpoint=stream_endpoint
@@ -103,6 +127,15 @@ def main(sfx_auth_key, api_endpoint, stream_endpoint, detector_id):
 
             logging.error("Detector checks: %s" % warnings)
             logging.error("Alert rule checks: %s" % rule_warnings)
+
+            if format == "json":
+                print(
+                    json.dumps(
+                        {"warnings": warnings, "rule_warnings": rule_warnings},
+                        sort_keys=True,
+                        indent=4,
+                    )
+                )
 
             computation.close()
 
