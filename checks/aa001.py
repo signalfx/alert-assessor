@@ -17,4 +17,4 @@ class AA001(Check):
         if age < self.config["COND_DET_MATURE_MS"]:
             return True
 
-        return True
+        return False
