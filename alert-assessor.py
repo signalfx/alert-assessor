@@ -14,7 +14,7 @@ if 'SFX_AUTH_KEY' not in os.environ:
 detector_id = sys.argv[1]
 now_ms = int(round(time.time() * 1000))
 
-RE_USES_PARAMETER_VARS = re.compile('\{\{\.*\}\}')
+RE_USES_PARAMETER_VARS = re.compile('\{\{\S*\}\}')
 
 COND_DET_MATURE_MS = 3 * 86400 * 1000
 COND_DET_OLD_ENOUGH_FOR_EVENTS_MS = 30 * 86400 * 1000
@@ -89,13 +89,13 @@ def assess_rules(detector):
         if 'parameterizedSubject' not in rule or not rule['parameterizedSubject']:
             rule_problems.append(E_RULE_MISSING_PARAMETERIZED_SUBJECT)
         else:
-            if not RE_USES_PARAMETER_VARS.match(rule['parameterizedSubject']):
+            if not RE_USES_PARAMETER_VARS.search(rule['parameterizedSubject']):
                 rule_problems.append(E_RULE_NOVARS_PARAMETERIZED_SUBJECT)
 
         if 'parameterizedBody' not in rule or not rule['parameterizedBody']:
             rule_problems.append(E_RULE_MISSING_PARAMETERIZED_BODY)
         else:
-            if not RE_USES_PARAMETER_VARS.match(rule['parameterizedBody']):
+            if not RE_USES_PARAMETER_VARS.search(rule['parameterizedBody']):
                 rule_problems.append(E_RULE_NOVARS_PARAMETERIZED_BODY)
 
         result['rule_problems'].append(rule_problems)
