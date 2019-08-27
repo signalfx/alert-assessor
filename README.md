@@ -7,8 +7,20 @@ The Alert Assessor looks at a detector and tells you how it can be *improved*.
 # Usage
 
 ```
-SFX_AUTH_KEY=<AUTH_KEY> python alert-assessor.py <ALERTID>
+Usage: alert-assessor.py [OPTIONS] DETECTOR_ID
+
+Options:
+  --sfx_auth_key TEXT     SFX token (or SFX_AUTH_KEY env variable)
+  --api_endpoint TEXT     API endpoint
+  --stream_endpoint TEXT  Stream endpoint
+  --help                  Show this message and exit.
 ```
+
+or you can provide the token in `SFX_AUTH_KEY` env var
+```
+SFX_AUTH_KEY=<AUTH_KEY> ./alert-assessor.py DETECTOR_ID
+```
+
 
 # Output
 
