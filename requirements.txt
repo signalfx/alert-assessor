@@ -1,1 +1,2 @@
 signalfx>=1.1.1
+click
