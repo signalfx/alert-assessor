@@ -121,13 +121,13 @@ def main(
                 logging.error("Detector checks:")
                 for det in warnings:
                     for warn in warnings[det]:
-                        print("\t{0}: {1}".format(det, warn))
+                        logging.info("\t{0}: {1}".format(det, warn))
             if len(rule_warnings) > 0:
                 logging.error("Alert rule checks")
                 for det in rule_warnings:
                     for rule in rule_warnings[det]:
                         for warn in rule_warnings[det][rule]:
-                            print("\t{0}: Rule: {1}: {2}".format(det, rule, warn))
+                            logging.info("\t{0}: Rule: {1}: {2}".format(det, rule, warn))
 
             if format == "json":
                 print(
