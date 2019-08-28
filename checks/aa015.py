@@ -5,7 +5,8 @@ from checks.check import Check, RuleCheck
 class AA015(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_PARAMETERIZED_BODY"
-    desc: str = ""
+    desc: str = "No parameterized body"
+    help: str = "Adding parameterized subjects allows an alert responder to more quickly understand the context of an alert, consider adding."
 
     def process(self, detector, events, incidents, computation):
 

@@ -5,8 +5,8 @@ from checks.check import Check
 class AA005(Check):
 
     ecode: str = "E_MISSING_RULES"
-    desc: str = "No rules!?"
-    help: str = ""
+    desc: str = "No rules!"
+    help: str = "This alert has no rules, so it isn't doing anything. Add rules or remove!"
 
     def process(self, detector, events, incidents, computation):
 

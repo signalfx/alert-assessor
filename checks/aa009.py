@@ -5,8 +5,8 @@ from checks.check import Check
 class AA009(Check):
 
     ecode: str = "E_RULE_INCIDENT_TOO_OLD"
-    desc: str = "An incident open this long is a bad sign that it is being ignored"
-    help: str = ""
+    desc: str = "An incident has been open too long."
+    help: str = "Having an incident open this long is a bad sign that it is being ignored. Consider removing."
 
     config: dict = {"COND_INCIDENT_TOO_OLD_MS": 1 * 86400 * 1000}
 

@@ -5,8 +5,8 @@ from checks.check import Check, RuleCheck
 class AA010(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_RUNBOOK_URL"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No runbook URL provided"
+    help: str = "Consider adding a link to a runbook so that alert responders have next steps."
 
     def process(self, detector, events, incidents, computation) -> dict:
 
