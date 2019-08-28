@@ -24,7 +24,7 @@ SFX_AUTH_KEY=<AUTH_KEY> ./alert-assessor.py DETECTOR_ID
 
 # Output
 
-The output contains per-rule and whole-detector checks. The findings are emitted as string "names" that can be mapped to feedback i18n style.
+The output contains per-rule and whole-detector checks. The findings are emitted as string "names" that can be mapped to feedback i18n style in addition to helper text.
 
 Example of `json` output formatted output:
 ```
