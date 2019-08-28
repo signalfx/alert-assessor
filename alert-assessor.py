@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from collections import defaultdict
 import logging
 import os
 import click
@@ -61,7 +62,7 @@ def main(
     if format == "json":
         lvl = logging.CRITICAL
 
-    logging.basicConfig(format=format, level=lvl, datefmt="%H:%M:%S")
+    logging.basicConfig(level=lvl, datefmt="%H:%M:%S")
 
     with signalfx.SignalFx(
         api_endpoint=api_endpoint, stream_endpoint=stream_endpoint
@@ -96,18 +97,15 @@ def main(
                 )
             )
 
-            warnings: Dict[str, List] = {}
+            warnings = defaultdict(list)
 
             for check in Check.__subclasses__():
                 logging.debug("Processing %s" % check.ecode)
                 ch = check()
                 if ch.process(detector, events, incidents, computation):
-                    if detector_id in warnings:
-                        warnings[detector_id].append(ch.ecode)
-                    else:
-                        warnings[detector_id] = [ch.ecode]
+                    warnings[detector_id].append(ch.ecode)
 
-            rule_warnings: Dict[str, List] = {}
+            rule_warnings = defaultdict(lambda: defaultdict(list))
 
             for check in RuleCheck.__subclasses__():
                 logging.debug("Processing alert check %s" % check.ecode)
@@ -116,17 +114,20 @@ def main(
                     detector, events, incidents, computation
                 )
                 if len(result):
-                    if detector_id not in rule_warnings:
-                        rule_warnings[detector_id] = {}
-
                     for rule_id, ecode in result.items():
-                        if rule_id in rule_warnings[detector_id].keys():
-                            rule_warnings[detector_id][rule_id].append(ecode)
-                        else:
-                            rule_warnings[detector_id][rule_id] = [ecode]
+                        rule_warnings[detector_id][rule_id].append(ecode)
 
-            logging.error("Detector checks: %s" % warnings)
-            logging.error("Alert rule checks: %s" % rule_warnings)
+            if len(warnings) > 0:
+                logging.error("Detector checks:")
+                for det in warnings:
+                    for warn in warnings[det]:
+                        print("\t{0}: {1}".format(det, warn))
+            if len(rule_warnings) > 0:
+                logging.error("Alert rule checks")
+                for det in rule_warnings:
+                    for rule in rule_warnings[det]:
+                        for warn in rule_warnings[det][rule]:
+                            print("\t{0}: Rule: {1}: {2}".format(det, rule, warn))
 
             if format == "json":
                 print(
