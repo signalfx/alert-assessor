@@ -2,7 +2,6 @@
 from checks.check import Check
 from functools import reduce
 
-
 class AA003(Check):
 
     ecode: str = "E_TOO_NOISY"
@@ -13,6 +12,8 @@ class AA003(Check):
     def process(self, detector, events, incidents, computation):
 
         event_count = len(events)
+        if event_count == 0:
+            return False
         last_ts = None
         occurrences = []
         events = sorted(events, key=lambda e: e["timestamp"])
