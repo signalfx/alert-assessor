@@ -29,18 +29,35 @@ The output contains per-rule and whole-detector checks. The findings are emitted
 Example of `json` output formatted output:
 ```
 {
-    "warnings": {
-        "Dw6JDETE2K1AAACTORJs": [
-            "E_TOO_IMMATURE",
-            "E_OLD_BUT_NO_EVENTS"
-        ]
-    },
     "rule_warnings": {
-        "Dw6JDETE2K1AAACTORJs": {
+        "EC5zlmcAcAA": {
             "0": [
-                "E_RULE_MISSING_RUNBOOK_URL"
+                {
+                    "description": "No notifications",
+                    "error_code": "E_RULE_MISSING_NOTIFICATIONS",
+                    "help": "An alert with no notifications cannot alert anyone. Consider removing or adding notifications."
+                },
+                {
+                    "description": "No parameterized body vars",
+                    "error_code": "E_RULE_NOVARS_PARAMETERIZED_BODY",
+                    "help": "Using a parameterized body with no vars misses out in improved context. Consider adding tags from the alert result."
+                }
             ]
         }
+    },
+    "warnings": {
+        "EC5zlmcAcAA": [
+            {
+                "description": "Not old enough to draw much from",
+                "error_code": "E_TOO_IMMATURE",
+                "help": "Let this alert cook a bit longer and try again!"
+            },
+            {
+                "description": "Some of the time series in this signalflow don't exist",
+                "error_code": "E_MISSING_TIMESERIES",
+                "help": "There are time series missing from this detector, which might mean the metrics have gone away and the alert needs adjusting or removal."
+            }
+        ]
     }
 }
 ```
