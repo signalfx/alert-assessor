@@ -7,7 +7,7 @@ class AA001(Check):
 
     ecode: str = "E_TOO_IMMATURE"
     desc: str = "not old enough to draw much from"
-    help: str = ""
+    help: str = "Let this alert cook a bit longer and try again!"
 
     config: dict = {"COND_DET_MATURE_MS": 3 * 86400 * 1000}
 

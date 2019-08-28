@@ -6,8 +6,8 @@ from checks.check import Check, RuleCheck
 class AA014(RuleCheck):
 
     ecode: str = "E_RULE_NOVARS_PARAMETERIZED_SUBJECT"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No parameterized subject vars"
+    help: str = "Using a parameterized subject with no vars misses out in improved context. Consider adding tags from the alert result."
 
     def process(self, detector, events, incidents, computation):
 

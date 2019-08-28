@@ -5,8 +5,8 @@ from checks.check import Check, RuleCheck
 class AA012(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_NOTIFICATIONS"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No notifications"
+    help: str = "An alert with no notifications cannot alert anyone. Consider removing or adding notifications."
 
     def process(self, detector, events, incidents, computation):
 

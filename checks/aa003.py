@@ -6,8 +6,9 @@ class AA003(Check):
 
     ecode: str = "E_TOO_NOISY"
     desc: str = "Fires too often!"
+    help: "This detector fires an average of once per day, consider adjusting."
 
-    config: dict = {"COND_DET_FREQUENCY_MS": 86400 * 1000}
+    config: dict = {"COND_DET_FREQUENCY_SECONDS": 86400}
 
     def process(self, detector, events, incidents, computation):
 
@@ -27,7 +28,7 @@ class AA003(Check):
             last_ts = ts
         average = reduce(lambda x, y: x + y, occurrences) / event_count
 
-        if average < self.config["COND_DET_FREQUENCY_MS"]:
+        if average < self.config["COND_DET_FREQUENCY_MS"] * 1000:
             return True
 
         return False

@@ -5,8 +5,8 @@ from checks.check import Check, RuleCheck
 class AA016(RuleCheck):
 
     ecode: str = "E_RULE_NOVARS_PARAMETERIZED_BODY"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No parameterized body vars"
+    help: str = "Using a parameterized body with no vars misses out in improved context. Consider adding tags from the alert result."
 
     def process(self, detector, events, incidents, computation):
 

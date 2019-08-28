@@ -5,8 +5,8 @@ from checks.check import Check, RuleCheck
 class AA011(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_TIP"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No tip is provided"
+    help: str = "The tip provides alert responders with a quick suggestion of next steps. Consider adding."
 
     def process(self, detector, events, incidents, computation):
 

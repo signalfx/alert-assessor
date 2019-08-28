@@ -6,8 +6,8 @@ from checks.check import Check, RuleCheck
 class AA013(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_PARAMETERIZED_SUBJECT"
-    desc: str = ""
-    help: str = ""
+    desc: str = "No parameterized subject"
+    help: str = "Adding parameterized subjects allows an alert responder to more quickly understand the context of an alert, consider adding."
 
     RE_USES_PARAMETER_VARS = re.compile("\{\{\S*\}\}")
 
