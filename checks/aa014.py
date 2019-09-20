@@ -2,7 +2,6 @@
 import re
 from checks.check import Check, RuleCheck
 
-
 class AA014(RuleCheck):
 
     ecode: str = "E_RULE_NOVARS_PARAMETERIZED_SUBJECT"

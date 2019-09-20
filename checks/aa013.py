@@ -2,7 +2,6 @@
 import re
 from checks.check import Check, RuleCheck
 
-
 class AA013(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_PARAMETERIZED_SUBJECT"

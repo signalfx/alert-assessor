@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from checks.check import Check
 
-
 class AA005(Check):
 
     ecode: str = "E_MISSING_RULES"

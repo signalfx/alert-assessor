@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from checks.check import Check
 
-
 class AA009(Check):
 
     ecode: str = "E_RULE_INCIDENT_TOO_OLD"

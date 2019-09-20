@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 from checks.check import Check
 
-
-class AA008(Check):
+class AA007(Check):
 
     ecode: str = "E_TOOMANY_TIMESERIES"
     desc: str = "Too many time series!"

@@ -21,12 +21,44 @@ or you can provide the token in `SFX_AUTH_KEY` env var
 SFX_AUTH_KEY=<AUTH_KEY> ./alert-assessor.py DETECTOR_ID
 ```
 
+# Features
+
+The assessor can spot detectors with the following conditions:
+
+* "immature" that might not have enough information to be accurately assessed.
+* have not generated any alerts in the last 30 days, do they work?
+* have never fired!
+* too noisy, firing at least once a day
+* no rules, what is this even doing?
+* missing time series, metric gone?
+* too many time series, detector is dropping stuff
+* unlike aggregation terms
+* alerts that have been active (and probably ignored) for a long time
+* no runbook
+* no tip
+* doesn't notify anyone
+* not using a parameterized subject or body
+* not using any variables in parameterized body or subject
 
 # Output
 
 The output contains per-rule and whole-detector checks. The findings are emitted as string "names" that can be mapped to feedback i18n style in addition to helper text.
 
-Example of `json` output formatted output:
+Here's an example of the default output:
+
+```
+INFO:root:Registered 16 rule(s)
+ERROR:root:Alert rule checks
+INFO:root:	EC5zlmcAcAA: Rule: 0 E_RULE_MISSING_NOTIFICATIONS
+	No notifications
+	An alert with no notifications cannot alert anyone. Consider removing or adding notifications.
+
+INFO:root:	EC5zlmcAcAA: Rule: 0 E_RULE_NOVARS_PARAMETERIZED_BODY
+	No parameterized body vars
+	Using a parameterized body with no vars misses out in improved context. Consider adding tags from the alert result.
+```
+
+And an example of `json` output formatted output:
 ```
 {
     "rule_warnings": {

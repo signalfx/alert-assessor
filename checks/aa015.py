@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from checks.check import Check, RuleCheck
 
-
 class AA015(RuleCheck):
 
     ecode: str = "E_RULE_MISSING_PARAMETERIZED_BODY"

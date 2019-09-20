@@ -2,7 +2,6 @@
 from checks.check import Check
 import time
 
-
 class AA002(Check):
 
     ecode: str = "E_OLD_BUT_NO_EVENTS"

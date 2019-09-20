@@ -1,10 +1,8 @@
 import re
 
-
 class Check:
     def __init__(self):
         pass
-
 
 class RuleCheck:
 

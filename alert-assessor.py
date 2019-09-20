@@ -22,7 +22,6 @@ class Payload:
     events: list
     incidents: list
 
-
 @click.command()
 @click.option(
     "--sfx_auth_key",

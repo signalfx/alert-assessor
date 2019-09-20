@@ -2,7 +2,6 @@
 from checks.check import Check
 import time
 
-
 class AA001(Check):
 
     ecode: str = "E_TOO_IMMATURE"

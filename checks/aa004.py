@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from checks.check import Check
 
-
 class AA004(Check):
 
     ecode: str = "E_TOO_QUIET"
