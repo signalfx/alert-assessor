@@ -93,3 +93,16 @@ And an example of `json` output formatted output:
     }
 }
 ```
+
+# TODO
+
+This is definitely a work in progress. It can do so many things to help humans! Here's some stuff:
+
+* Add more things!
+* list detectors by pattern, and apply rules to all
+* `.accessor.yaml`, where one can disable  or configure rules, or point at custom rules
+  * Or perhaps in-alert pragma
+* offer to fix things? are there even rules that this would make sense for?
+* colorize output, because why not
+* reduce boiler plate in RuleCheck
+* add tests with JSON blobs from the API
